@@ -1,0 +1,15 @@
+# Exported from:        http://DAI-100SQ04:5516/
+# Release version:      25.1.4-808.849
+# Date created:         Fri Jan 23 15:47:58 IST 2026
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  path: /
+  home: gitops-cynthia
+spec:
+- folderVariables:
+  - type: xlrelease.StringVariable
+    key: folder.var-001
+    value: eeeee
