@@ -11,3 +11,4 @@ spec:
   - Variables.yaml
   - Template_second.yaml
   - Template_IR_DLR_Group_Releases.yaml
+  - Template_Deploy + SE - Optional.yaml
