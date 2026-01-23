@@ -17,3 +17,65 @@ spec:
   - type: xlrelease.StringVariable
     key: folder.var-002
     value: eeeee-2
+- folderVariables:
+  - type: xlrelease.StringVariable
+    key: folder.harnessApiPayload
+    value: "import groovy.json.JsonOutput\n \ndef apiKey = \"${folder.harnessPAT}\"\
+      \  // replace with your real Harness PAT\ndef urlStr = \"https://disney.harness.io/pipeline/api/pipeline/execute/${harnessPipelineIdentifier}/stages\"\
+      \ +\n             \"?accountIdentifier=${folder.harnessAccountId}&orgIdentifier=${harnessOrgId}&projectIdentifier=${harnessProjectIdentifier}&branch=develop\"\
+      \n \n// Build the request body (as a Groovy map, then convert to JSON)\ndef\
+      \ requestBody = [\n    runtimeInputYaml: \"\"\"pipeline:\n  identifier: ${harnessPipelineIdentifier}\n\
+      \  template:\n    templateInputs:\n      stages:\n        - stage:\n       \
+      \     identifier: Deploy\n            template:\n              templateInputs:\n\
+      \                type: Custom\n                spec:\n                  execution:\n\
+      \                    steps:\n                      - stepGroup:\n          \
+      \                identifier: CHG_Management\n                          template:\n\
+      \                            templateInputs:\n                             \
+      \ variables:\n                                - name: CHG_TYPE\n           \
+      \                       type: String\n                                  value:\
+      \ Comprehensive\n                                - name: CREATE_PREDEPLOYMENT_CTASK\n\
+      \                                  type: String\n                          \
+      \        value: \"false\"\n                                  default: \"false\"\
+      \n                                - name: RELATED_JIRA_PROJECT\n           \
+      \                       type: String\n                                  value:\
+      \ None\n                                  default: None\n                  \
+      \              - name: RELATED_JIRA_RELEASE\n                              \
+      \    type: String\n                                  value: None\n         \
+      \                         default: None\n                                - name:\
+      \ RELATED_CHG_LIST\n                                  type: String\n       \
+      \                           value: None\n                                  default:\
+      \ None\n                                - name: RELATED_INC_LIST\n         \
+      \                         type: String\n                                  value:\
+      \ None\n                                  default: None\n                  \
+      \              - name: RELATED_RITM_LIST\n                                 \
+      \ type: String\n                                  value: None\n            \
+      \                      default: None\n                variables:\n         \
+      \         - name: ENVIRONMENT\n                    type: String\n          \
+      \          value: latest\n                  - name: SKIP_CANARY\n          \
+      \          type: String\n                    value: \"TRUE\"\n             \
+      \     - name: SITE_ID\n                    type: String\n                  \
+      \  default: None\n                    value: None\n                  - name:\
+      \ ENABLE_CHG_MANAGEMENT\n                    type: String\n                \
+      \    default: \"false\"\n                    value: \"false\"\n            \
+      \      - name: STANDALONE_CHG_MANAGEMENT\n                    type: String\n\
+      \                    default: \"false\"\n                    value: \"false\"\
+      \n                  - name: RUNDECK_ID\n                    type: String\n \
+      \                   default: NA\n                    value: NA\n      variables:\n\
+      \        - name: PROJECT_ROOT\n          type: String\n          value: .\n\
+      \        - name: PIPELINE_TYPE\n          type: String\n          value: application\n\
+      \      properties:\n        ci:\n          codebase:\n            build:\n \
+      \             type: branch\n              spec:\n                branch: develop\n\
+      \"\"\",\n    stageIdentifiers: [\n        \"Pipeline_Validation\",\n       \
+      \ \"Deploy\",\n        \"LTC_Record\"\n    ],\n    expressionValues: [\n   \
+      \     \"<+pipeline.stages.Build.spec.execution.steps.Build.steps.Maven_Build.steps.Get_Version.output.outputVariables.FILE_VERSION>\"\
+      : ${build_version}\n    ]\n]\n \ndef payload = JsonOutput.toJson(requestBody)\n\
+      \ \ndef url = new URL(urlStr)\ndef conn = (HttpURLConnection) url.openConnection()\n\
+      conn.setRequestMethod(\"POST\")\nconn.setRequestProperty(\"Content-Type\", \"\
+      application/json\")\nconn.setRequestProperty(\"x-api-key\", apiKey)\nconn.setDoOutput(true)\n\
+      \ \n// Write payload\nconn.outputStream.withWriter(\"UTF-8\") { writer ->\n\
+      \    writer << payload\n}\n \ndef responseCode = conn.responseCode\nprintln\
+      \ \"Response Code: ${responseCode}\"\n \ndef responseStream = (responseCode\
+      \ < 400) ? conn.inputStream : conn.errorStream\ndef responseText = responseStream.getText(\"\
+      UTF-8\")\nprintln \"Response Body:\\n${responseText}\""
+    multiline: true
+  
