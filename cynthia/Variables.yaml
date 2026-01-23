@@ -13,3 +13,7 @@ spec:
   - type: xlrelease.StringVariable
     key: folder.var-001
     value: eeeee
+- folderVariables:
+  - type: xlrelease.StringVariable
+    key: folder.var-002
+    value: eeeee-2
