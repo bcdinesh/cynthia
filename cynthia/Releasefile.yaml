@@ -10,3 +10,4 @@ spec:
   - Template_first.yaml
   - Variables.yaml
   - Template_second.yaml
+  - Template_IR_DLR_Group_Releases.yaml

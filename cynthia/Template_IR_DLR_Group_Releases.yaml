@@ -1,0 +1,931 @@
+# Exported from:        https://xebiarlmgmt.wdprapps.disney.com/
+# Release version:      25.1.4-808.849
+# Date created:         Wed Nov 19 06:10:06 UTC 2025
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  path: /
+  home: Cynthia
+spec:
+- template: IR_DLR_Group_Releases
+  scheduledStartDate: 2024-03-20T13:00:00Z
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: DLR Resort Details SPA
+      type: xlrelease.CreateReleaseTask
+      newReleaseTitle: IR-DLR Resort Details SPA
+      templateVariables:
+      - type: xlrelease.StringVariable
+        key: Release_Version
+        label: Release Version
+        description: "Application Release Version (Example : 1.3.2)"
+        value: "${rstdetailsspa_release}"
+      - type: xlrelease.StringVariable
+        key: app_name
+        label: Application Name As Per CHG - BAPPID
+        value: DLR Resort Details SPA
+      - type: xlrelease.StringVariable
+        key: tech_lead
+        label: Requested by
+        inherited: true
+        value: Mohan Masilamani
+      - type: xlrelease.StringVariable
+        key: channel
+        requiresValue: false
+        label: Slack Channel Name for Release Notifications
+        description: "Format: ( ir-\"app name as you wish\" ) Do not append release\
+          \ version for creating a new channel..Channel name should be below 22 characters,\
+          \ with no special characters and space. Don't provide name in upper case."
+        inherited: true
+        value: dpep-studio-terror-releases
+      - type: xlrelease.BooleanVariable
+        key: skip_phaseslack
+        label: Do We Need To Create Slack Channel ?
+        description: Checkbox/Enable - To create New Slack Channel (or) Leave it unchecked
+          - If a Slack Channel Already Exists
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: business_impact
+        requiresValue: false
+        label: Business Impact of Change
+        description: Please provide details why this change is needed for prod implementation
+          so there is no impact to live site.
+        value: "${business_impact}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: business_justification
+        requiresValue: false
+        label: Business Justification of Change
+        description: Please provide details why this change is needed for prod implementation.
+        value: "${business_justification}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: StakeHolders
+        label: Release Stake-Holders
+        inherited: true
+        value: mohisin.anwar.mohammed.-nd@disney.com
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: chg_template
+        label: Change Template to be Applied
+        inherited: true
+        value: DPEP Live
+      - type: xlrelease.StringVariable
+        key: blackout_scope
+        label: Is There Any Change Management Freeze?
+        description: Do we have any SOX / Year End / Finance / Monthly-Weekend / WDW
+          - DLR Freeze Going On
+        inherited: true
+        value: NA
+      - type: xlrelease.StringVariable
+        key: build_version
+        requiresValue: false
+        label: Build Version
+        description: "Please Provide Jenkins Build Job Number from your Build Version.\
+          \ ( EX: 1.2.0-4596 Here 4596 is the jenkins build job number )"
+        value: "${rstdetails_version}"
+      - type: xlrelease.StringVariable
+        key: rollback_version
+        requiresValue: false
+        label: Rollback version
+        value: "${rstdetails_prodversion}"
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_stage
+        label: Deploy To Stage
+        description: checkbox/Enable this field if deploy is to be performed in stage
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_load
+        label: Deploy to Load
+        description: checkbox/Enable this field if deploy is to be performed in load
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: chg_qa_nimbus
+        requiresValue: false
+        label: SE - Nimbus/Vault QA (Stage&Load) CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.BooleanVariable
+        key: chg_nimbus
+        label: SE - Nimbus/Vault Prod CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: nimbus_info
+        requiresValue: false
+        label: Nimbus Information
+        description: "If you have any Nimbus Changes Then Please provide for Lower\
+          \ and Higher Env's. NOTE: if you dont know the changes then PLEASE REPLACE\
+          \ NA with SE Will Perform The CHanges"
+        inherited: true
+        value: Nimbus Changes - Not Needed
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: rollback_info
+        requiresValue: false
+        label: Production Rollback Instructions
+        inherited: true
+        value: |-
+          SE/Database RollBack Instructions: ( Enter step by step instructions if any )
+
+          ====================================================
+          Application RollBack Instructions ( Toggle off etc ): ( Enter step by step instructions if any )
+        multiline: true
+      - type: xlrelease.BooleanVariable
+        key: skip_qa
+        requiresValue: false
+        label: Create QA Change ?
+        description: If you don't want to CREATE QA CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: skip_prod
+        requiresValue: false
+        label: Create PROD Change ?
+        description: If you don't want to CREATE PROD CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      riskProfile: Default risk profile
+      template: ./CloudApps-Hotfix-Vision-Release-DLR-Ravi-BKP
+      folder: ./
+    - name: DLR Resort Details API
+      type: xlrelease.CreateReleaseTask
+      newReleaseTitle: IR-DLR Resort Details API
+      templateVariables:
+      - type: xlrelease.StringVariable
+        key: Release_Version
+        label: Release Version
+        description: "Application Release Version (Example : 1.3.2)"
+        value: "${rstdetailsapi_release}"
+      - type: xlrelease.StringVariable
+        key: app_name
+        label: Application Name As Per CHG - BAPPID
+        value: DLR Resort Details Web API
+      - type: xlrelease.StringVariable
+        key: tech_lead
+        label: Requested by
+        inherited: true
+        value: Mohan Masilamani
+      - type: xlrelease.StringVariable
+        key: channel
+        requiresValue: false
+        label: Slack Channel Name for Release Notifications
+        description: "Format: ( ir-\"app name as you wish\" ) Do not append release\
+          \ version for creating a new channel..Channel name should be below 22 characters,\
+          \ with no special characters and space. Don't provide name in upper case."
+        inherited: true
+        value: dpep-studio-terror-releases
+      - type: xlrelease.BooleanVariable
+        key: skip_phaseslack
+        label: Do We Need To Create Slack Channel ?
+        description: Checkbox/Enable - To create New Slack Channel (or) Leave it unchecked
+          - If a Slack Channel Already Exists
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: business_impact
+        requiresValue: false
+        label: Business Impact of Change
+        description: Please provide details why this change is needed for prod implementation
+          so there is no impact to live site.
+        value: "${business_impact}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: business_justification
+        requiresValue: false
+        label: Business Justification of Change
+        description: Please provide details why this change is needed for prod implementation.
+        value: "${business_justification}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: StakeHolders
+        label: Release Stake-Holders
+        inherited: true
+        value: mohisin.anwar.mohammed.-nd@disney.com
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: chg_template
+        label: Change Template to be Applied
+        inherited: true
+        value: DPEP Live
+      - type: xlrelease.StringVariable
+        key: blackout_scope
+        label: Is There Any Change Management Freeze?
+        description: Do we have any SOX / Year End / Finance / Monthly-Weekend / WDW
+          - DLR Freeze Going On
+        inherited: true
+        value: NA
+      - type: xlrelease.StringVariable
+        key: build_version
+        requiresValue: false
+        label: Build Version
+        description: "Please Provide Jenkins Build Job Number from your Build Version.\
+          \ ( EX: 1.2.0-4596 Here 4596 is the jenkins build job number )"
+        value: "${rstdetailsapi_version}"
+      - type: xlrelease.StringVariable
+        key: rollback_version
+        requiresValue: false
+        label: Rollback version
+        value: "${rstdetailsapi_prodversion}"
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_stage
+        label: Deploy To Stage
+        description: checkbox/Enable this field if deploy is to be performed in stage
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_load
+        label: Deploy to Load
+        description: checkbox/Enable this field if deploy is to be performed in load
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: chg_qa_nimbus
+        requiresValue: false
+        label: SE - Nimbus/Vault QA (Stage&Load) CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.BooleanVariable
+        key: chg_nimbus
+        label: SE - Nimbus/Vault Prod CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: nimbus_info
+        requiresValue: false
+        label: Nimbus Information
+        description: "If you have any Nimbus Changes Then Please provide for Lower\
+          \ and Higher Env's. NOTE: if you dont know the changes then PLEASE REPLACE\
+          \ NA with SE Will Perform The CHanges"
+        inherited: true
+        value: Nimbus Changes - Not Needed
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: rollback_info
+        requiresValue: false
+        label: Production Rollback Instructions
+        inherited: true
+        value: |-
+          SE/Database RollBack Instructions: ( Enter step by step instructions if any )
+
+          ====================================================
+          Application RollBack Instructions ( Toggle off etc ): ( Enter step by step instructions if any )
+        multiline: true
+      - type: xlrelease.BooleanVariable
+        key: skip_qa
+        requiresValue: false
+        label: Create QA Change ?
+        description: If you don't want to CREATE QA CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: skip_prod
+        requiresValue: false
+        label: Create PROD Change ?
+        description: If you don't want to CREATE PROD CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      riskProfile: Default risk profile
+      template: ./CloudApps-Hotfix-Vision-Release-DLR-Ravi-BKP
+      folder: ./
+    - name: DLR Resort List SPA
+      type: xlrelease.CreateReleaseTask
+      templateVariables:
+      - type: xlrelease.StringVariable
+        key: Release_Version
+        label: Release Version
+        description: "Application Release Version (Example : 1.3.2)"
+        value: "${rstlistspa_release}"
+      - type: xlrelease.StringVariable
+        key: app_name
+        label: Application Name As Per CHG - BAPPID
+        value: DLR Resort List SPA
+      - type: xlrelease.StringVariable
+        key: tech_lead
+        label: Requested by
+        inherited: true
+        value: Mohan Masilamani
+      - type: xlrelease.StringVariable
+        key: channel
+        requiresValue: false
+        label: Slack Channel Name for Release Notifications
+        description: "Format: ( ir-\"app name as you wish\" ) Do not append release\
+          \ version for creating a new channel..Channel name should be below 22 characters,\
+          \ with no special characters and space. Don't provide name in upper case."
+        inherited: true
+        value: dpep-studio-terror-releases
+      - type: xlrelease.BooleanVariable
+        key: skip_phaseslack
+        label: Do We Need To Create Slack Channel ?
+        description: Checkbox/Enable - To create New Slack Channel (or) Leave it unchecked
+          - If a Slack Channel Already Exists
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: business_impact
+        requiresValue: false
+        label: Business Impact of Change
+        description: Please provide details why this change is needed for prod implementation
+          so there is no impact to live site.
+        value: "${business_impact}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: business_justification
+        requiresValue: false
+        label: Business Justification of Change
+        description: Please provide details why this change is needed for prod implementation.
+        value: "${business_justification}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: StakeHolders
+        label: Release Stake-Holders
+        inherited: true
+        value: mohisin.anwar.mohammed.-nd@disney.com
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: chg_template
+        label: Change Template to be Applied
+        inherited: true
+        value: DPEP Live
+      - type: xlrelease.StringVariable
+        key: blackout_scope
+        label: Is There Any Change Management Freeze?
+        description: Do we have any SOX / Year End / Finance / Monthly-Weekend / WDW
+          - DLR Freeze Going On
+        inherited: true
+        value: NA
+      - type: xlrelease.StringVariable
+        key: build_version
+        requiresValue: false
+        label: Build Version
+        description: "Please Provide Jenkins Build Job Number from your Build Version.\
+          \ ( EX: 1.2.0-4596 Here 4596 is the jenkins build job number )"
+        value: "${rstlistspa_version}"
+      - type: xlrelease.StringVariable
+        key: rollback_version
+        requiresValue: false
+        label: Rollback version
+        value: "${rstlistspa_prodversion}"
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_stage
+        label: Deploy To Stage
+        description: checkbox/Enable this field if deploy is to be performed in stage
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_load
+        label: Deploy to Load
+        description: checkbox/Enable this field if deploy is to be performed in load
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: chg_qa_nimbus
+        requiresValue: false
+        label: SE - Nimbus/Vault QA (Stage&Load) CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.BooleanVariable
+        key: chg_nimbus
+        label: SE - Nimbus/Vault Prod CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: nimbus_info
+        requiresValue: false
+        label: Nimbus Information
+        description: "If you have any Nimbus Changes Then Please provide for Lower\
+          \ and Higher Env's. NOTE: if you dont know the changes then PLEASE REPLACE\
+          \ NA with SE Will Perform The CHanges"
+        inherited: true
+        value: Nimbus Changes - Not Needed
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: rollback_info
+        requiresValue: false
+        label: Production Rollback Instructions
+        inherited: true
+        value: |-
+          SE/Database RollBack Instructions: ( Enter step by step instructions if any )
+
+          ====================================================
+          Application RollBack Instructions ( Toggle off etc ): ( Enter step by step instructions if any )
+        multiline: true
+      - type: xlrelease.BooleanVariable
+        key: skip_qa
+        requiresValue: false
+        label: Create QA Change ?
+        description: If you don't want to CREATE QA CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: skip_prod
+        requiresValue: false
+        label: Create PROD Change ?
+        description: If you don't want to CREATE PROD CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      riskProfile: Default risk profile
+      template: ./CloudApps-Hotfix-Vision-Release-DLR-Ravi-BKP
+      folder: ./
+    - name: DLR Resort List API
+      type: xlrelease.CreateReleaseTask
+      newReleaseTitle: IR-DLR Resort List API
+      templateVariables:
+      - type: xlrelease.StringVariable
+        key: Release_Version
+        label: Release Version
+        description: "Application Release Version (Example : 1.3.2)"
+        value: "${rstlistapi_release}"
+      - type: xlrelease.StringVariable
+        key: app_name
+        label: Application Name As Per CHG - BAPPID
+        value: DLR Resort List web API
+      - type: xlrelease.StringVariable
+        key: tech_lead
+        label: Requested by
+        inherited: true
+        value: Mohan Masilamani
+      - type: xlrelease.StringVariable
+        key: channel
+        requiresValue: false
+        label: Slack Channel Name for Release Notifications
+        description: "Format: ( ir-\"app name as you wish\" ) Do not append release\
+          \ version for creating a new channel..Channel name should be below 22 characters,\
+          \ with no special characters and space. Don't provide name in upper case."
+        inherited: true
+        value: dpep-studio-terror-releases
+      - type: xlrelease.BooleanVariable
+        key: skip_phaseslack
+        label: Do We Need To Create Slack Channel ?
+        description: Checkbox/Enable - To create New Slack Channel (or) Leave it unchecked
+          - If a Slack Channel Already Exists
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: business_impact
+        requiresValue: false
+        label: Business Impact of Change
+        description: Please provide details why this change is needed for prod implementation
+          so there is no impact to live site.
+        value: "${business_impact}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: business_justification
+        requiresValue: false
+        label: Business Justification of Change
+        description: Please provide details why this change is needed for prod implementation.
+        value: "${business_justification}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: StakeHolders
+        label: Release Stake-Holders
+        inherited: true
+        value: mohisin.anwar.mohammed.-nd@disney.com
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: chg_template
+        label: Change Template to be Applied
+        inherited: true
+        value: DPEP Live
+      - type: xlrelease.StringVariable
+        key: blackout_scope
+        label: Is There Any Change Management Freeze?
+        description: Do we have any SOX / Year End / Finance / Monthly-Weekend / WDW
+          - DLR Freeze Going On
+        inherited: true
+        value: NA
+      - type: xlrelease.StringVariable
+        key: build_version
+        requiresValue: false
+        label: Build Version
+        description: "Please Provide Jenkins Build Job Number from your Build Version.\
+          \ ( EX: 1.2.0-4596 Here 4596 is the jenkins build job number )"
+        value: "${rstlistapi_version}"
+      - type: xlrelease.StringVariable
+        key: rollback_version
+        requiresValue: false
+        label: Rollback version
+        value: "${rstlistapi_prodversion}"
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_stage
+        label: Deploy To Stage
+        description: checkbox/Enable this field if deploy is to be performed in stage
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_load
+        label: Deploy to Load
+        description: checkbox/Enable this field if deploy is to be performed in load
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: chg_qa_nimbus
+        requiresValue: false
+        label: SE - Nimbus/Vault QA (Stage&Load) CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.BooleanVariable
+        key: chg_nimbus
+        label: SE - Nimbus/Vault Prod CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: nimbus_info
+        requiresValue: false
+        label: Nimbus Information
+        description: "If you have any Nimbus Changes Then Please provide for Lower\
+          \ and Higher Env's. NOTE: if you dont know the changes then PLEASE REPLACE\
+          \ NA with SE Will Perform The CHanges"
+        inherited: true
+        value: Nimbus Changes - Not Needed
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: rollback_info
+        requiresValue: false
+        label: Production Rollback Instructions
+        inherited: true
+        value: |-
+          SE/Database RollBack Instructions: ( Enter step by step instructions if any )
+
+          ====================================================
+          Application RollBack Instructions ( Toggle off etc ): ( Enter step by step instructions if any )
+        multiline: true
+      - type: xlrelease.BooleanVariable
+        key: skip_qa
+        requiresValue: false
+        label: Create QA Change ?
+        description: If you don't want to CREATE QA CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: skip_prod
+        requiresValue: false
+        label: Create PROD Change ?
+        description: If you don't want to CREATE PROD CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      riskProfile: Default risk profile
+      template: ./CloudApps-Hotfix-Vision-Release-DLR-Ravi-BKP
+      folder: ./
+    - name: DLR Resort Online Modifications SPA
+      type: xlrelease.CreateReleaseTask
+      newReleaseTitle: IR-DLR Resort Online Modifications SPA
+      templateVariables:
+      - type: xlrelease.StringVariable
+        key: Release_Version
+        label: Release Version
+        description: "Application Release Version (Example : 1.3.2)"
+        value: "${onlinemodspa_release}"
+      - type: xlrelease.StringVariable
+        key: app_name
+        label: Application Name As Per CHG - BAPPID
+        value: DLR Online Modifications SPA
+      - type: xlrelease.StringVariable
+        key: tech_lead
+        label: Requested by
+        inherited: true
+        value: Mohan Masilamani
+      - type: xlrelease.StringVariable
+        key: channel
+        requiresValue: false
+        label: Slack Channel Name for Release Notifications
+        description: "Format: ( ir-\"app name as you wish\" ) Do not append release\
+          \ version for creating a new channel..Channel name should be below 22 characters,\
+          \ with no special characters and space. Don't provide name in upper case."
+        inherited: true
+        value: dpep-studio-terror-releases
+      - type: xlrelease.BooleanVariable
+        key: skip_phaseslack
+        label: Do We Need To Create Slack Channel ?
+        description: Checkbox/Enable - To create New Slack Channel (or) Leave it unchecked
+          - If a Slack Channel Already Exists
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: business_impact
+        requiresValue: false
+        label: Business Impact of Change
+        description: Please provide details why this change is needed for prod implementation
+          so there is no impact to live site.
+        value: "${business_impact}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: business_justification
+        requiresValue: false
+        label: Business Justification of Change
+        description: Please provide details why this change is needed for prod implementation.
+        value: "${business_justiication}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: StakeHolders
+        label: Release Stake-Holders
+        inherited: true
+        value: mohisin.anwar.mohammed.-nd@disney.com
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: chg_template
+        label: Change Template to be Applied
+        inherited: true
+        value: DPEP Live
+      - type: xlrelease.StringVariable
+        key: blackout_scope
+        label: Is There Any Change Management Freeze?
+        description: Do we have any SOX / Year End / Finance / Monthly-Weekend / WDW
+          - DLR Freeze Going On
+        inherited: true
+        value: NA
+      - type: xlrelease.StringVariable
+        key: build_version
+        requiresValue: false
+        label: Build Version
+        description: "Please Provide Jenkins Build Job Number from your Build Version.\
+          \ ( EX: 1.2.0-4596 Here 4596 is the jenkins build job number )"
+        value: "${onlinemodsspa_version}"
+      - type: xlrelease.StringVariable
+        key: rollback_version
+        requiresValue: false
+        label: Rollback version
+        value: "${onlinemodsspa_prodversion}"
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_stage
+        label: Deploy To Stage
+        description: checkbox/Enable this field if deploy is to be performed in stage
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_load
+        label: Deploy to Load
+        description: checkbox/Enable this field if deploy is to be performed in load
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: chg_qa_nimbus
+        requiresValue: false
+        label: SE - Nimbus/Vault QA (Stage&Load) CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.BooleanVariable
+        key: chg_nimbus
+        label: SE - Nimbus/Vault Prod CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: nimbus_info
+        requiresValue: false
+        label: Nimbus Information
+        description: "If you have any Nimbus Changes Then Please provide for Lower\
+          \ and Higher Env's. NOTE: if you dont know the changes then PLEASE REPLACE\
+          \ NA with SE Will Perform The CHanges"
+        inherited: true
+        value: Nimbus Changes - Not Needed
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: rollback_info
+        requiresValue: false
+        label: Production Rollback Instructions
+        inherited: true
+        value: |-
+          SE/Database RollBack Instructions: ( Enter step by step instructions if any )
+
+          ====================================================
+          Application RollBack Instructions ( Toggle off etc ): ( Enter step by step instructions if any )
+        multiline: true
+      - type: xlrelease.BooleanVariable
+        key: skip_qa
+        requiresValue: false
+        label: Create QA Change ?
+        description: If you don't want to CREATE QA CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: skip_prod
+        requiresValue: false
+        label: Create PROD Change ?
+        description: If you don't want to CREATE PROD CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      riskProfile: Default risk profile
+      template: ./CloudApps-Hotfix-Vision-Release-DLR-Ravi-BKP
+      folder: ./
+    - name: DLR Resort Online Modifications API
+      type: xlrelease.CreateReleaseTask
+      newReleaseTitle: IR-DLR Resort Online Modifications API
+      templateVariables:
+      - type: xlrelease.StringVariable
+        key: Release_Version
+        label: Release Version
+        description: "Application Release Version (Example : 1.3.2)"
+        value: "${onlinemodapi_release}"
+      - type: xlrelease.StringVariable
+        key: app_name
+        label: Application Name As Per CHG - BAPPID
+        value: DLR Online Modifications Web API
+      - type: xlrelease.StringVariable
+        key: tech_lead
+        label: Requested by
+        inherited: true
+        value: Mohan Masilamani
+      - type: xlrelease.StringVariable
+        key: channel
+        requiresValue: false
+        label: Slack Channel Name for Release Notifications
+        description: "Format: ( ir-\"app name as you wish\" ) Do not append release\
+          \ version for creating a new channel..Channel name should be below 22 characters,\
+          \ with no special characters and space. Don't provide name in upper case."
+        inherited: true
+        value: dpep-studio-terror-releases
+      - type: xlrelease.BooleanVariable
+        key: skip_phaseslack
+        label: Do We Need To Create Slack Channel ?
+        description: Checkbox/Enable - To create New Slack Channel (or) Leave it unchecked
+          - If a Slack Channel Already Exists
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: business_impact
+        requiresValue: false
+        label: Business Impact of Change
+        description: Please provide details why this change is needed for prod implementation
+          so there is no impact to live site.
+        value: "${business_impact}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: business_justification
+        requiresValue: false
+        label: Business Justification of Change
+        description: Please provide details why this change is needed for prod implementation.
+        value: "${business_justification}"
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: StakeHolders
+        label: Release Stake-Holders
+        inherited: true
+        value: mohisin.anwar.mohammed.-nd@disney.com
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: chg_template
+        label: Change Template to be Applied
+        inherited: true
+        value: DPEP Live
+      - type: xlrelease.StringVariable
+        key: blackout_scope
+        label: Is There Any Change Management Freeze?
+        description: Do we have any SOX / Year End / Finance / Monthly-Weekend / WDW
+          - DLR Freeze Going On
+        inherited: true
+        value: NA
+      - type: xlrelease.StringVariable
+        key: build_version
+        requiresValue: false
+        label: Build Version
+        description: "Please Provide Jenkins Build Job Number from your Build Version.\
+          \ ( EX: 1.2.0-4596 Here 4596 is the jenkins build job number )"
+        value: "${onlinemodsapi_version}"
+      - type: xlrelease.StringVariable
+        key: rollback_version
+        requiresValue: false
+        label: Rollback version
+        value: "${onlinemodsapi_prodversion}"
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_stage
+        label: Deploy To Stage
+        description: checkbox/Enable this field if deploy is to be performed in stage
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: bypass_build_load
+        label: Deploy to Load
+        description: checkbox/Enable this field if deploy is to be performed in load
+          environment.
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: chg_qa_nimbus
+        requiresValue: false
+        label: SE - Nimbus/Vault QA (Stage&Load) CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.BooleanVariable
+        key: chg_nimbus
+        label: SE - Nimbus/Vault Prod CTask
+        description: checkbox/Enable this field if nimbus task is needed to be created
+          in the CRQ
+        inherited: true
+      - type: xlrelease.StringVariable
+        key: nimbus_info
+        requiresValue: false
+        label: Nimbus Information
+        description: "If you have any Nimbus Changes Then Please provide for Lower\
+          \ and Higher Env's. NOTE: if you dont know the changes then PLEASE REPLACE\
+          \ NA with SE Will Perform The CHanges"
+        inherited: true
+        value: Nimbus Changes - Not Needed
+        multiline: true
+      - type: xlrelease.StringVariable
+        key: rollback_info
+        requiresValue: false
+        label: Production Rollback Instructions
+        inherited: true
+        value: |-
+          SE/Database RollBack Instructions: ( Enter step by step instructions if any )
+
+          ====================================================
+          Application RollBack Instructions ( Toggle off etc ): ( Enter step by step instructions if any )
+        multiline: true
+      - type: xlrelease.BooleanVariable
+        key: skip_qa
+        requiresValue: false
+        label: Create QA Change ?
+        description: If you don't want to CREATE QA CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      - type: xlrelease.BooleanVariable
+        key: skip_prod
+        requiresValue: false
+        label: Create PROD Change ?
+        description: If you don't want to CREATE PROD CHANGE THEN PLEASE UNCHECK THE
+          BOX / DISABLE The Option
+        inherited: true
+        value: true
+      riskProfile: Default risk profile
+      template: ./CloudApps-Hotfix-Vision-Release-DLR-Ravi-BKP
+      folder: ./
+  variables:
+  - type: xlrelease.StringVariable
+    key: rstdetails_version
+  - type: xlrelease.StringVariable
+    key: rstdetails_prodversion
+  - type: xlrelease.StringVariable
+    key: rstdetailsapi_version
+  - type: xlrelease.StringVariable
+    key: rstdetailsapi_prodversion
+  - type: xlrelease.StringVariable
+    key: rstlistspa_version
+  - type: xlrelease.StringVariable
+    key: rstlistspa_prodversion
+  - type: xlrelease.StringVariable
+    key: business_impact
+  - type: xlrelease.StringVariable
+    key: business_justification
+  - type: xlrelease.StringVariable
+    key: rstlistapi_version
+  - type: xlrelease.StringVariable
+    key: rstlistapi_prodversion
+  - type: xlrelease.StringVariable
+    key: business_justiication
+  - type: xlrelease.StringVariable
+    key: onlinemodsspa_version
+  - type: xlrelease.StringVariable
+    key: onlinemodsspa_prodversion
+  - type: xlrelease.StringVariable
+    key: onlinemodsapi_version
+  - type: xlrelease.StringVariable
+    key: onlinemodsapi_prodversion
+  - type: xlrelease.StringVariable
+    key: rstdetailsspa_release
+  - type: xlrelease.StringVariable
+    key: rstdetailsapi_release
+  - type: xlrelease.StringVariable
+    key: rstlistspa_release
+  - type: xlrelease.StringVariable
+    key: rstlistapi_release
+  - type: xlrelease.StringVariable
+    key: onlinemodspa_release
+  - type: xlrelease.StringVariable
+    key: onlinemodapi_release
+  scriptUsername: admin
+  scriptUserPassword: !value "xlrelease_Release_IR_DLR_Group_Releases_scriptUserPassword"
+  riskProfile: Default risk profile
