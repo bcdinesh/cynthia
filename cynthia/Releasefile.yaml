@@ -9,3 +9,4 @@ spec:
   imports:
   - Template_first.yaml
   - Variables.yaml
+  - Template_second.yaml
