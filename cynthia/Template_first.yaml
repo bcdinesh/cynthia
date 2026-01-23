@@ -9,13 +9,22 @@ metadata:
   path: /
   home: gitops-cynthia
 spec:
-- pattern: PCP Infra Akamai SE Changes Release
-  description: PCP Releases for Akamai CHanges to Track
-  stages:
-  - stage: Initialize Release
-  - stage: STAGE Change Completed
-  - stage: LOAD Change Completed
-  - stage: Production Change Draft
-  - stage: Production CAB Schedule & Approval
-  - stage: Release Notes & Prod Completion Status
-  autoComplete: true
+- template: Deploy + SE - Optional
+  scheduledStartDate: 2020-06-29T03:30:00Z
+  phases:
+  - phase: TEAMS NOTIFICATIONS
+    tasks:
+    - name: PCP Release
+      type: delivery.FindOrCreateDelivery
+      searchStrategy: Search by criteria
+      nameFilter: "PCP Release ${delivery_effort}"
+      fallback: true
+      ^title: "PCP Release ${delivery_effort}"
+      pattern: Cynthia/PCP Release
+      variableMapping:
+        pythonScript.deliveryId: "${delivery_id}"
+    - name: Register
+      type: delivery.RegisterTrackedItems
+      delivery: "${delivery_id}"
+      variableMapping:
+        pythonScript.trackedItems: "${application}"
