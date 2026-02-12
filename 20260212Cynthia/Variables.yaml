@@ -1,15 +1,39 @@
-# Exported from:        http://DAI-100SQ04:5516/
-# Release version:      25.1.4-808.849
-# Date created:         Thu Feb 12 16:25:17 IST 2026
+# Exported from:        https://xebiarlmgmt.wdprapps.disney.com/
+# Release version:      25.3.1-1124.941
+# Date created:         Mon Jan 19 13:29:33 UTC 2026
 
 ---
 apiVersion: xl-release/v1
 kind: Templates
 metadata:
   path: /
-  home: 20260212-cynthia
+  home: Gitops
 spec:
 - folderVariables:
   - type: xlrelease.StringVariable
-    key: folder.first
-    value: first
+    key: folder.test
+    value: Test
+  - type: xlrelease.StringVariable
+    key: folder.changedesc
+    value: "***NOTHING ON THIS TEMPLATE IS TO BE DELETED***\n\n1. Description of change\
+      \ including business driver/justification.  DO NOT ANSWER WITH LINK TO JIRA\
+      \ AS JUSTIFICATION\nAnswer:\nBusiness Justification: ${business_justification}\n\
+      \nJIRA Tickets: \n${JiraTicketDetails2}\n\n2. What is the business and/or financial\
+      \ impact/ risk to Disney if this work is not performed? \nAnswer:\nBusiness\
+      \ Impact:  ${business_impact}\n\n3. What sites and user groups are affected\
+      \ and how are they affected by this change? (with one of the following WDW/DLR/AUL\
+      \ and Guest/Cast/Both/None). (If None, please explain.) \nAnswer:  ${select_brand}\
+      \ Guest & Cast\n\n******If there is a service outage expected as part of the\
+      \ work being performed on this change (for any period), even if during your\
+      \ maintenance window, please fill-out the \"EXPECTED OUTAGE DURATION\" field\
+      \ below the planned end date.   Additionally, please contact teams / stakeholders/add\
+      \ approval task(s) for application team(s) that will be affected and ensure\
+      \ alignment where needed. ****** \n\n4. If the Change is not scheduled during\
+      \ the Standard Maintenance Window [23:00 - 06:00] then please provide an approved\
+      \ Business justification for the proposed. \nAnswer: As per CM guidelines, it\
+      \ is scheduled during EST Standard Maintenance Window: ${std_mnt_window} .\n\
+      \n5. Describe potential impact to any Financial Production Systems (ex: Financial\
+      \ Interfaces, Payment Process Systems and any impact to systems or services\
+      \ related to Media) \nAnswer: ${blackout_scope}\n\n\n<DO NOT DELETE THE INFORMATION\
+      \ ABOVE THIS LINE>"
+    multiline: true

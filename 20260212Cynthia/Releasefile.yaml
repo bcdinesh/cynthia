@@ -1,11 +1,13 @@
-# Exported from:        http://DAI-100SQ04:5516/
-# Release version:      25.1.4-808.849
-# Date created:         Thu Feb 12 16:25:17 IST 2026
+# Exported from:        https://xebiarlmgmt.wdprapps.disney.com/
+# Release version:      25.3.1-1124.941
+# Date created:         Mon Jan 19 13:29:33 UTC 2026
 
 ---
 apiVersion: xl-release/v1
 kind: Import
 spec:
   imports:
-  - Template_Test T1.yaml
+  - Template_gitops-test.yaml
+  - Template_test.yaml
+  - Template_ui_template_test.yaml
   - Variables.yaml

@@ -1,0 +1,25 @@
+# Exported from:        https://xebiarlmgmt.wdprapps.disney.com/
+# Release version:      25.3.1-1124.941
+# Date created:         Mon Jan 19 13:29:33 UTC 2026
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  path: /
+  home: Gitops
+spec:
+- template: Gitops-Test
+  scheduledStartDate: 2026-01-19T14:00:00Z
+  dueDate: 2026-01-19T15:00:00Z
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: Pause
+      type: xlrelease.Task
+  - phase: New Test Phase
+    tasks:
+    - name: Pause
+      type: xlrelease.Task    
+  riskProfile: Default risk profile
+  author: Mohisin.Anwar.Mohammed.-ND@disney.com
