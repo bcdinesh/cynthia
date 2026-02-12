@@ -16,6 +16,10 @@ spec:
     tasks:
     - name: New task
       type: xlrelease.Task
+  - phase: New Phase copy
+    tasks:
+    - name: New task
+      type: xlrelease.Task
   - phase: New Test Phase
     tasks:
     - name: New task
